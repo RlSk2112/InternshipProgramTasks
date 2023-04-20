@@ -1,26 +1,26 @@
 package bg.rumen.TaskOne;
+import bg.rumen.util.Logger;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.*;
 
 public class FirstTask {
     public static void main(String[] args) {
-
         try {
             solve();
-        } catch (IOException exception) {
-            System.out.println(exception.getMessage());
+        } catch (FileNotFoundException e) {
+            Logger.log(e.getMessage());
         }
     }
 
 
-    public static void solve() throws IOException {
-        BufferedReader bufferedReader = new BufferedReader(new FileReader("src/main/java/bg/rumen/TaskOne/resources/input.txt"));
-        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("src/main/java/bg/rumen/TaskOne/resources/output.txt"));
+    public static void solve() throws FileNotFoundException {
+        Scanner scanner = new Scanner(new File("src/main/resources/resourcesTaskOne/input.txt"));
 
         Map<String, Integer> colorsMap = new HashMap<>();
 
-        String command = bufferedReader.readLine();
+        String command = scanner.nextLine();
         while (!command.equals("End")) {
             String[] commandLine = command.split(": ");
             String currentColor = commandLine[0];
@@ -30,7 +30,7 @@ public class FirstTask {
             int newCount = colorsMap.get(currentColor) + currentCount;
             colorsMap.put(currentColor, newCount);
 
-            command = bufferedReader.readLine();
+            command = scanner.nextLine();
         }
 
         int max = 0;
@@ -43,10 +43,7 @@ public class FirstTask {
             sum += entry.getValue();
         }
 
-
-        bufferedWriter.write(String.format("%d", sum - max));
-
-        bufferedReader.close();
-        bufferedWriter.close();
+        Logger.log(String.format("%d", sum - max));
+        scanner.close();
     }
 }
