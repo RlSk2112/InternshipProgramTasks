@@ -1,3 +1,5 @@
+package bg.rumen.TaskFour;
+
 public class SalesConsultant implements Worker {
 
     private Shop workingShop;

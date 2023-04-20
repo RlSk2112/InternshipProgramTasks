@@ -1,3 +1,5 @@
+package bg.rumen.TaskTwo;
+
 import java.util.Scanner;
 
 public class SecondTask {

@@ -1,3 +1,5 @@
+package bg.rumen.TaskThree;
+
 import java.util.*;
 
 public class TaskThree {

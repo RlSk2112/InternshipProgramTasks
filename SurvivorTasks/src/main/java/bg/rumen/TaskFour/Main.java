@@ -1,3 +1,5 @@
+package bg.rumen.TaskFour;
+
 public class Main {
     public static void main(String[] args) {
         Shop shop = Shop.getInstance();
