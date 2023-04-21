@@ -1,6 +1,6 @@
-package bg.rumen.TaskFour.shop;
+package bg.rumen.shoptask.shop;
 
-import bg.rumen.TaskFour.workers.interfaces.Worker;
+import bg.rumen.shoptask.workers.interfaces.Worker;
 
 import java.util.ArrayList;
 import java.util.List;

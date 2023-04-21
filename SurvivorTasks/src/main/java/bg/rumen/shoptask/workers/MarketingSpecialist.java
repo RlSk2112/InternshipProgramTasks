@@ -1,6 +1,6 @@
-package bg.rumen.TaskFour.workers;
+package bg.rumen.shoptask.workers;
 
-import bg.rumen.TaskFour.workers.interfaces.Worker;
+import bg.rumen.shoptask.workers.interfaces.Worker;
 
 public class MarketingSpecialist implements Worker {
 

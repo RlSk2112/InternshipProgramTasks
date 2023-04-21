@@ -1,4 +1,4 @@
-package bg.rumen.TaskTwo;
+package bg.rumen.rabbittask;
 
 import bg.rumen.util.Logger;
 
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class SecondTask {
+public class Rabbit {
     public static void main(String[] args) {
 
         try {
@@ -20,7 +20,7 @@ public class SecondTask {
     }
 
     private static void solve() throws FileNotFoundException {
-        Scanner scanner = new Scanner(new File("src/main/resources/resourcesTaskTwo/secondOptionInput.txt"));
+        Scanner scanner = new Scanner(new File("src/main/resources/rabbittask/first.txt"));
 
         int dimensions = Integer.parseInt(scanner.nextLine());
 
@@ -39,8 +39,7 @@ public class SecondTask {
     private static int getCountLeaps(char[][] garden, int dimensions) {
         List<int[]> coordinatesOfCarrots = getCoordinatesOfCarrots(garden, dimensions);
         List<int[]> grouper = new ArrayList<>();
-        for (int index = 0;  index < coordinatesOfCarrots.size(); index++) {
-            int[] currentCoordinates = coordinatesOfCarrots.get(index);
+        for (int[] currentCoordinates : coordinatesOfCarrots) {
             int row = currentCoordinates[0];
             int col = currentCoordinates[1];
             garden[row][col] = '_';

@@ -1,4 +1,4 @@
-package bg.rumen.TaskFour.workers.interfaces;
+package bg.rumen.shoptask.workers.interfaces;
 
 public interface Worker {
 

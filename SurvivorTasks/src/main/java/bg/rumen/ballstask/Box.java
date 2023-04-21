@@ -1,11 +1,11 @@
-package bg.rumen.TaskOne;
+package bg.rumen.ballstask;
 import bg.rumen.util.Logger;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
 
-public class FirstTask {
+public class Box {
     public static void main(String[] args) {
         try {
             solve();
@@ -16,7 +16,7 @@ public class FirstTask {
 
 
     public static void solve() throws FileNotFoundException {
-        Scanner scanner = new Scanner(new File("src/main/resources/resourcesTaskOne/firstOptionInput.txt"));
+        Scanner scanner = new Scanner(new File("src/main/resources/ballstask/input.txt"));
 
         Map<String, Integer> colorsMap = new HashMap<>();
 
