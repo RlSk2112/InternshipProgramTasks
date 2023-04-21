@@ -1,10 +1,12 @@
-package bg.rumen.TaskFour;
+package bg.rumen.TaskFour.shop;
+
+import bg.rumen.TaskFour.workers.interfaces.Worker;
 
 import java.util.ArrayList;
 import java.util.List;
 
-class Shop {
-    private static Shop instance = Shop.getInstance();
+public class Shop {
+    private static Shop instance;
     private List<Worker> workers;
 
 
@@ -16,7 +18,6 @@ class Shop {
         if (instance == null) {
             instance = new Shop();
         }
-
         return instance;
     }
 
@@ -26,9 +27,9 @@ class Shop {
     }
 
     public double getTurnover() {
-        var turnOver = 0.0;
+        double turnOver = 0.0;
         for (Worker worker : this.workers) {
-                turnOver +=  worker.getBudget();
+            turnOver +=  worker.getBudget();
         }
         return turnOver;
     }

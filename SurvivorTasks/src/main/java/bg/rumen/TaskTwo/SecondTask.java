@@ -1,80 +1,125 @@
 package bg.rumen.TaskTwo;
 
+import bg.rumen.util.Logger;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class SecondTask {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+
+        try {
+            solve();
+        } catch (FileNotFoundException e) {
+            Logger.log(e.getMessage());
+        }
+
+    }
+
+    private static void solve() throws FileNotFoundException {
+        Scanner scanner = new Scanner(new File("src/main/resources/resourcesTaskTwo/secondOptionInput.txt"));
 
         int dimensions = Integer.parseInt(scanner.nextLine());
 
         char[][] garden = new char[dimensions][dimensions];
 
-
         fillGarden(garden, dimensions);
-        garden[0][0] = 'R';
-
-
-//        put more carrots for bigger garden with dimensions like 10x10
-//        if (dimensions > 4) {
-//            garden[3][3] = 'C';
-//            garden[3][4] = 'C';
-//            garden[4][3] = 'C';
-//            garden[4][4] = 'C';
-//        }
-
-
+        getCarrots(scanner, garden);
 
         printGarden(garden);
-        int count = getCountLeaps(garden);
-        System.out.println(count);
+        int count = getCountLeaps(garden, dimensions);
+        Logger.log(count + "");
     }
 
-    private static int getCountLeaps(char[][] garden) {
-        int count = 1;
 
-        for (int row = 0; row < garden.length - 1; row++) {
-            for (int col = 0; col < garden[row].length - 1; col++) {
-                if (garden[row][col] == 'C'
-                        && garden[row][col + 1] == '_'
-                        && garden[row + 1][col] == '_') {
-                    count++;
+
+    private static int getCountLeaps(char[][] garden, int dimensions) {
+        List<int[]> coordinatesOfCarrots = getCoordinatesOfCarrots(garden, dimensions);
+        List<int[]> grouper = new ArrayList<>();
+        for (int index = 0;  index < coordinatesOfCarrots.size(); index++) {
+            int[] currentCoordinates = coordinatesOfCarrots.get(index);
+            int row = currentCoordinates[0];
+            int col = currentCoordinates[1];
+            garden[row][col] = '_';
+
+            boolean isEmpty = true;
+            for (int rowIndex = row - 1; rowIndex <= row + 1; rowIndex++) {
+                for (int colIndex = col - 1; colIndex <= col + 1; colIndex++) {
+                    if (areValidIndexes(garden, rowIndex, colIndex) && !checkForEmptyField(garden, rowIndex, colIndex)) {
+                        isEmpty = false;
+                        break;
+                    }
+                }
+            }
+            if (isEmpty) {
+                int[] coordinates = {row, col};
+                grouper.add(coordinates);
+            }
+        }
+
+        return grouper.size();
+    }
+
+    private static List<int[]> getCoordinatesOfCarrots(char[][] garden, int dimensions) {
+        List<int[]> coordinatesOfCarrots = new ArrayList<>();
+
+        for (int row = 0; row < dimensions; row++) {
+            for (int col = 0; col < dimensions; col++) {
+
+                if (garden[row][col] == 'C') {
+                    int[] coordinates = {row, col};
+                    coordinatesOfCarrots.add(coordinates);
                 }
             }
         }
-        return count;
+        return coordinatesOfCarrots;
     }
 
 
-    public static void fillGarden(char[][] garden, int dimensions) {
+
+    private static void fillGarden(char[][] garden, int dimensions) {
         for (int row = 0; row < dimensions; row++) {
             for (int col = 0; col < dimensions; col++) {
-                garden[row][col] = putSymbol(dimensions, row, col);
+                garden[row][col] = '_';
             }
         }
     }
 
+    private static void getCarrots(Scanner scanner, char[][] garden) {
+        String command = scanner.nextLine();
+        while (!command.equals("End")) {
+            String[] coordinates = command.split("\s+");
+            int inputRow = Integer.parseInt(coordinates[0]);
+            int inputCol = Integer.parseInt(coordinates[1]);
 
-    public static void printGarden(char[][] garden) {
+            if (areValidIndexes(garden, inputRow, inputCol)) {
+                garden[inputRow][inputCol] = 'C';
+            }
+
+            command = scanner.nextLine();
+        }
+    }
+
+
+    private static void printGarden(char[][] garden) {
         for (char[] row : garden) {
+            String line = "";
             for (char symbol : row) {
-                System.out.print(symbol);
+                line = line.concat(symbol + "");
             }
-            System.out.println();
+            Logger.log(line);
         }
     }
 
 
-    public static char putSymbol(int dimensions, int rowToCheck, int colToCheck) {
-        char symbol = '_';
-        boolean firstGroupCondition = (rowToCheck == 0 || rowToCheck == 1) && (colToCheck == 0 || colToCheck == 1);
-        boolean secondGroupCondition = (rowToCheck == dimensions - 2 || rowToCheck == dimensions - 1)
-                && (colToCheck == dimensions - 2 || colToCheck == dimensions - 1);
-
-        if (firstGroupCondition || secondGroupCondition) {
-            symbol = 'C';
-        }
-        return symbol;
+    private static boolean areValidIndexes(char[][] garden, int row, int col) {
+        return row >= 0 && row < garden.length && col >= 0 && col < garden[row].length;
     }
 
+    private static boolean checkForEmptyField(char[][] garden, int row, int col) {
+        return garden[row][col] == '_';
+    }
 }

@@ -1,57 +1,53 @@
 package bg.rumen.TaskThree;
 
+import bg.rumen.util.Logger;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.*;
 
 public class TaskThree {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
 
-        String initialFirst = scanner.nextLine();
-        String initialSecond = scanner.nextLine();
-
-        String firstWord = initialFirst;
-        String nextWord = initialSecond;
-
-        Set<Character> firstSymbols = getSymbols(firstWord);
-        Set<Character> secondSymbols = getSymbols(nextWord);
-
-
-        firstWord = getFilteredString(firstWord, secondSymbols);
-        nextWord = getFilteredString(nextWord, firstSymbols);
-
-        firstSymbols = getSymbols(firstWord);
-        secondSymbols = getSymbols(nextWord);
-
-        int sumRemoved = (initialFirst.length() - firstSymbols.size()) + (initialSecond.length() - secondSymbols.size());
-
-        System.out.println(sumRemoved);
-
+        try {
+            solve();
+        } catch (IOException exception) {
+            Logger.log(exception.getMessage());
+        }
     }
 
-    private static String getFilteredString(String word, Set<Character> symbolsSet) {
-        int index = 0;
-        while (index < word.length()) {
+    private static void solve() throws FileNotFoundException {
+        Scanner scanner = new Scanner(new File("src/main/resources/resourcesTaskThree/firstOptionInput.txt"));
 
-            char searchedSymbol = word.charAt(index);
+        String firstWord = scanner.nextLine();
+        String nextWord = scanner.nextLine();
 
-            if (!symbolsSet.contains(searchedSymbol)) {
-                int indexSearched = word.indexOf(searchedSymbol);
-               word =  word.replace(word.substring(indexSearched, indexSearched + 1), "");
-               index--;
+        char[] firstSymbols;
+        char[] secondSymbols;
+
+        if (firstWord.length() <= nextWord.length()) {
+            firstSymbols = firstWord.toCharArray();
+            secondSymbols = nextWord.toCharArray();
+        } else {
+            firstSymbols = nextWord.toCharArray();
+            secondSymbols = firstWord.toCharArray();
+        }
+
+        String output = "";
+
+            for (char symbolOne : firstSymbols) {
+                for (char symbolTwo : secondSymbols) {
+                    if (symbolOne == symbolTwo) {
+                        output = output.concat(symbolOne + "");
+                        break;
+                    }
+                }
             }
 
-            index++;
-        }
-        return word;
+        int sum = (firstWord.length() - output.length()) + (nextWord.length() - output.length());
+        Logger.log(sum + "");
+
     }
 
-
-    public static Set<Character> getSymbols(String word) {
-        Set<Character> symbolsSet = new LinkedHashSet<>();
-        for (int index = 0; index < word.length(); index++) {
-            char currentSymbol = word.charAt(index);
-            symbolsSet.add(currentSymbol);
-        }
-        return symbolsSet;
-    }
 }

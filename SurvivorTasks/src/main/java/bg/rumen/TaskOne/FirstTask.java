@@ -16,7 +16,7 @@ public class FirstTask {
 
 
     public static void solve() throws FileNotFoundException {
-        Scanner scanner = new Scanner(new File("src/main/resources/resourcesTaskOne/input.txt"));
+        Scanner scanner = new Scanner(new File("src/main/resources/resourcesTaskOne/firstOptionInput.txt"));
 
         Map<String, Integer> colorsMap = new HashMap<>();
 

@@ -1,16 +1,15 @@
-package bg.rumen.TaskFour;
+package bg.rumen.TaskFour.workers;
+
+import bg.rumen.TaskFour.workers.interfaces.Worker;
 
 public class SalesConsultant implements Worker {
 
-    private Shop workingShop;
     private double earnedMoney;
 
     public SalesConsultant() {
-        this.workingShop = Shop.getInstance();
     }
 
-    @Override
-    public void moneyAction(double price) {
+    public void sellProduct(double price) {
         this.earnedMoney += Math.max(price, 0);
     }
 
