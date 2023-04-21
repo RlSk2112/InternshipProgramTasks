@@ -1,0 +1,15 @@
+@media only screen and (max-width: 660px) {
+  .first-row,
+  .second-row,
+  .third-row {
+    margin-bottom: 18%;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .first-row,
+  .second-row,
+  .third-row {
+    margin-bottom: 6%;
+  }
+}

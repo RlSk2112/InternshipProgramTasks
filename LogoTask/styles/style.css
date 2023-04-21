@@ -1,0 +1,78 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+}
+
+
+.first-row,
+.second-row,
+.third-row,
+.fourth-row {
+    display: flex;
+    align-content: space-between;
+}   
+
+.left {
+  margin-right: auto;
+}
+
+
+.right {
+  background-color: blue;
+}
+
+
+
+.right {
+    display: inline-block;
+    height: 15vh;
+}
+
+.first-row > .left {
+    width: 32%;
+    background-color: rgba(112,40,105,255);
+}
+
+.first-row > .right {
+    width: 32%;
+    background-color: rgba(111,43,108,255);
+}
+
+.second-row > .left {
+    width: 60%;
+    background-color: rgba(99,64,127,255);
+}
+
+.second-row > .right {
+    width: 32%;
+    background-color: rgba(98,64,128,255);
+}
+
+.third-row > .left {
+    width: 32%;
+    background-color: rgba(77,81,150,255);
+}
+
+.third-row > .right {
+    width: 60%;
+    background-color: rgba(80,80,148,255);
+}
+
+.fourth-row > .left {
+    width: 32%;
+    background-color: rgba(52,92,169,255);
+}
+
+.fourth-row > .right {
+    width: 60%;
+    background-color: rgba(53,92,167,255);
+}
+
+.first-row,
+.second-row,
+.third-row {
+    margin-bottom: 12%;
+}
+
+
+
