@@ -10,7 +10,7 @@ public class SalesConsultant implements Worker {
     }
 
     public void sellProduct(double price) {
-        this.earnedMoney += Math.max(price, 0);
+        this.earnedMoney += price;
     }
 
     @Override

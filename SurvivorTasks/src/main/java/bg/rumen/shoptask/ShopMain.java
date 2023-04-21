@@ -5,7 +5,7 @@ import bg.rumen.shoptask.workers.MarketingSpecialist;
 import bg.rumen.shoptask.workers.SalesConsultant;
 import bg.rumen.shoptask.workers.interfaces.Worker;
 
-public class Main {
+public class ShopMain {
     public static void main(String[] args) {
         Shop shop = Shop.getInstance();
 

@@ -10,7 +10,7 @@ public class MarketingSpecialist implements Worker {
     }
 
     public void spendMoney(double marketingCampaignCost) {
-        this.budget -= Math.max(marketingCampaignCost, 0);
+        this.budget -= marketingCampaignCost;
     }
 
     @Override
